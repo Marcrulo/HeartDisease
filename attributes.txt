@@ -6,15 +6,19 @@ Created on Sun Sep 12 19:42:01 2021
 @author: marc8165
 """
 
-Name        Type1        Type2    
-age         discr.       interval
-sex         discr.       nominal
-cp          discr.       nominal
-trestbps    discr.       ratio (interval in practice)
-chol        discr.       ratio
-fbs         discr.       nominal
-restecg     discr.       ratio
-thalach     discr.       ratio
-exang       discr.       norminal
-oldpeak     cont.        ratio
-
+    Name        Type1        Type2    
+1   age         discr.       interval
+2   sex         discr.       nominal
+3   cp          discr.       nominal
+4   trestbps    discr.       ratio (interval in practice)
+5   chol        discr.       ratio
+6   fbs         discr.       nominal
+7   restecg     discr.       ratio
+8   thalach     discr.       ratio
+9   exang       discr.       nominal
+10  oldpeak     cont.        ratio
+11  slope       discr.       nominal (ordinal?)
+12  ca          discr.       ratio
+13  thal        discr.       nominal (ordinal?)
+------------------------------------------
+14  target      discr.       nominal (binary at least)
