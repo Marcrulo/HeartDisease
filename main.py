@@ -12,7 +12,6 @@ import pandas as pd
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
-
 # %% Import data
 
 # Read

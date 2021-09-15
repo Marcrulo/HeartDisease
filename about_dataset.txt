@@ -7,6 +7,43 @@ Created on Tue Sep 14 11:51:31 2021
 """
 
 1) Explain what the data is about
+Heart disease describes a range of conditions that affect your heart. 
+Diseases under the heart disease umbrella include blood vessel diseases, 
+such as coronary artery disease, heart rhythm problems (arrhythmias) and 
+heart defects you’re born with (congenital heart defects), among others.
+
+This database contains 76 attributes, but all published experiments refer to 
+using a subset of 14 of them. In particular, the Cleveland database is the 
+only one that has been used by ML researchers to
+this date. The "goal" field refers to the presence of 
+heart disease in the patient. It is integer valued from 0 (no presence) to 4.
+
+Experiments with the Cleveland database have concentrated on simply attempting 
+to distinguish presence (values 1,2,3,4) from absence (value 0).
+
+
 2) Reference to where we got the data
+https://www.kaggle.com/ronitf/heart-disease-uci
+https://archive.ics.uci.edu/ml/datasets/Heart+Disease
+
+
 3) Summarize previous analysis of the data (go through source papers or something)
+Age and blood preasure are the clearest indications of possible heart disease
+The dataset has already been reduced to the most relevant attributes,
+
+
 4) How should classification and regression be applied on the dataset
+
+A- Classification: Classify whether a person has a heart disease
+
+B- Linear regression: Can't be applied to the main target of the dataset (this 
+being whether a person has a heart disease or not), but can be applied to
+many of the other variables. Linear regression can be used to predict 
+heartrate; given all the other attributes.
+
+
+
+
+A few helpful links
+https://towardsdatascience.com/heart-disease-prediction-73468d630cfc
+https://pdf.sciencedirectassets.com/280203/1-s2.0-S1877050920X00111/1-s2.0-S1877050920315210/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAMaCXVzLWVhc3QtMSJHMEUCIBg24mBYi9DpaMPkFV90tS7kN1Ux26N3tsBzXxewu4aKAiEAvE6N%2B8EKdQwM%2By%2BBdALsXBaXTGmCwyfxEm18O919u64q%2BgMIXBAEGgwwNTkwMDM1NDY4NjUiDOOfMNeXPQz%2Fq3FySirXA116Nt26IRbAn%2B9qagNGLw0hLof4r1jWlW8nIxgJCSJj5K%2B02YkfoiZZiuHx7dehDAo0DXgTXtujkzEz%2Fxa22ubm9zMrWGoqjs7f7QMPUgdAINs%2BQw3SKJktqmd7aDUGZN7l%2FKQVW3joDeAjTDHaErgR7SVvyQfHkACJJoSB2cuLJ0GKTqH5Sl7N22tb9%2BAZWEQTMaH5Dh4drXIYHwO12NI9y%2FW4zX2W%2FUU4y5vq9YhciTdKcPMdyeG4R5XKVb5Jzdhm0Pj0rh7OKDYEuLjrHA8zzB%2Fziehy6VqnSww7jENzhSx2O5mYIDbC7BdxTkGFQRebtkr%2BRqgtgAEUNx0VU6HO968tttTsEQTz4PEJI4Je4MJizzgME%2BYm7jyuaDeEkYmvXymWVgV0gwbuVvhMs4JxQkB0%2Fkb9NgKJg7w9t8ig01G%2FovnWz377J4rsKDKIzBxFr3EsZJ9PyBp05dAkHujs1uMY6TPlptMQNryNVf31Bgs81Kv6Df9T12Im2eZeFUFM6nKcPAMEq86yavcdplGqGnA7pqPqpr5CiXGSrUg569DJdu7kSfYU%2BZvL79gWRJ3Z%2F4hGSUfu7MT9HXqe3siRgxfXtnPXXsmY9dp%2BwyOn8esdDhi92TCblIeKBjqlAeU2w0sU2QDRXO4A85YYn%2FZrkZQ7DYYo2QTYtZjkk2AsZsqyaQt0VgTCEszrcHkq5xkLOJTew715PIZIJlsy5R3EcIc17098%2BhqEjF7GEZcgyVPGDa5Cfj6zITqUOZGPMknuxfYmajxLYc97YRxtzZzyi%2B%2FMu6tewnrwPql3yL0XfvVjm8zp0h%2BHs3SZpBztzznbKcJW%2B3bbvBIPFEszRem1uQRZzw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20210915T120247Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY6LFM6S7Y%2F20210915%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=de52c9c884feeb9284ce7a8ee11739ced075f447b3396557e5c59ada1056b9f9&hash=df473490a1582f56dbc475c9a35ff3967fc7b792e0519b23597a48a8b24b00bf&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1877050920315210&tid=spdf-2ba96848-2889-4dc1-ad79-a1ad4a104b61&sid=ed651ae22eb3e647ae39ae66e2e4624c8d34gxrqb&type=client
