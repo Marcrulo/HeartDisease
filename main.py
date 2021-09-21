@@ -52,8 +52,8 @@ print(df.describe(include='all'))
 # %% PCA
 pca = PCA(n_components=2)
 principalComponents = pca.fit_transform(df)
-#principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
-principalDf = pd.DataFrame(data = principalComponents)
+principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
+#principalDf = pd.DataFrame(data = principalComponents)
 finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
 
 # %% # EXPLAINED VARIANCE
@@ -77,7 +77,7 @@ print(pca.components_)
 N,M=df.shape
 V=pca.components_.T
 
-pcs = [0,1,2]
+pcs = [0,1]
 legendStrs = ['PC'+str(e+1) for e in pcs]
 bw = .2
 r = np.arange(1,M+1)
@@ -85,6 +85,7 @@ attributeNames = df.columns.values.tolist()
 
 for i in pcs:    
     plt.bar(r+i*bw, V[:,i], width=bw)
+    
 plt.xticks(r+bw, attributeNames,rotation=90)
 plt.xlabel('Attributes')
 plt.ylabel('Component coefficients')
