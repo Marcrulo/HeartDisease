@@ -50,7 +50,7 @@ print(df.describe(include='all'))
 
 
 # %% PCA
-pca = PCA(n_components=3)
+pca = PCA(n_components=2)
 principalComponents = pca.fit_transform(df)
 #principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
 principalDf = pd.DataFrame(data = principalComponents)
