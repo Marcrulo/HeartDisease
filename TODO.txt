@@ -1,0 +1,7 @@
+1) GitHub connection
+2) Convert categorical data to numerical data
+3) Visualize data
+- notice outliers
+- normal distribution
+- correlation between variables
+4) Discussion about what we have learned about the data (as in: the entire thing)

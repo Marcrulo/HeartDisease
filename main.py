@@ -49,15 +49,6 @@ print(df.describe(include='all'))
 
 
 
-# %% PCA or something...
-
-# WHAT NEEDS TO BE DESCRIBED
-# the amount of variation explained as a function of the number of PCA components included
-# principal directions of the considered PCA components
-# the data projected onto the considered principal components
-
-
-
 # %% PCA
 pca = PCA(n_components=3)
 principalComponents = pca.fit_transform(df)
