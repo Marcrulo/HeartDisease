@@ -10,7 +10,7 @@ Created on Sun Sep 12 15:49:55 2021
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt, cm
+import matplotlib.pyplot as plt
 import scipy
 from scipy.stats import kstest, norm, zscore
 import statsmodels.api as sm
@@ -102,7 +102,8 @@ for i in range(len(cont_attrs)):
 ### a feasible comparision of alle attributes
 
 plt.boxplot(zscore(X, ddof=1))
-plt.xticks(range(1,14),attributeNames)
+plt.xticks(range(1,14),attributeNames,rotation=90)
+
 plt.ylabel('')
 plt.title('Heart disease dataset - chaotic boxplot')
 plt.show()
@@ -131,7 +132,7 @@ for i in range(0, X_tilde.shape[0]):
 X_standarized = zscore(X, ddof=1)
 
 plt.figure(figsize=(12,6))
-plt.imshow(X_standarized, interpolation='none', aspect=(4./N), cmap=cm.gray);
+plt.imshow(X_standarized, interpolation='none', aspect=(4./N), cmap=plt.cm.gray);
 plt.xticks(range(13), attributeNames)
 plt.xlabel('Attributes')
 plt.ylabel('Data objects')
@@ -143,11 +144,10 @@ plt.show()
 
 
 # %% PCA
-pca = PCA(n_components=2)
+pca = PCA(n_components=5)
 principalComponents = pca.fit_transform(df)
 
-principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
-#principalDf = pd.DataFrame(data = principalComponents)
+principalDf = pd.DataFrame(data = principalComponents)
 
 finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
 
@@ -172,7 +172,7 @@ print(pca.components_)
 N,M=df.shape
 V=pca.components_.T
 
-pcs = [0,1]
+pcs = [0,1,2,4]
 legendStrs = ['PC'+str(e+1) for e in pcs]
 bw = .2
 r = np.arange(1,M+1)
@@ -191,12 +191,20 @@ plt.show()
 
 
 # %% PLOT 2 FIRST PRINCIPCAL COMPONENTS
+pca = PCA(n_components=2)
+principalComponents = pca.fit_transform(df)
+principalDf = pd.DataFrame(data = principalComponents
+             , columns = ['principal component 1', 'principal component 2'])
+
+finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
+
+
 fig = plt.figure(figsize = (8,8))
 ax = fig.add_subplot(1,1,1) 
 ax.set_xlabel('Principal Component 1', fontsize = 15)
 ax.set_ylabel('Principal Component 2', fontsize = 15)
 ax.set_title('2 component PCA', fontsize = 20)
-targets = [0,1]
+targets = ['principal component 1', 'principal component 2']
 colors = ['r', 'g', 'b']
 for target, color in zip(targets,colors):
     indicesToKeep = finalDf['target'] == target
