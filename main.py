@@ -23,7 +23,6 @@ df=pd.read_csv('heart.csv')
 data=df.loc[:,'age':'thal']
 target=df.iloc[:,-1]
 
-
 # %% Summary statistics
 
 # MEASURES OF UNCERTAINTY
