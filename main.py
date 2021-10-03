@@ -191,6 +191,12 @@ plt.show()
 
 
 # %% PLOT 2 FIRST PRINCIPCAL COMPONENTS
+pca = PCA(n_components=2)
+principalComponents = pca.fit_transform(df)
+principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
+#principalDf = pd.DataFrame(data = principalComponents)
+finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
+
 fig = plt.figure(figsize = (8,8))
 ax = fig.add_subplot(1,1,1) 
 ax.set_xlabel('Principal Component 1', fontsize = 15)
