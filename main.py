@@ -10,8 +10,11 @@ Created on Sun Sep 12 15:49:55 2021
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-#from scipy import stats
+import matplotlib.pyplot as plt, cm
+import scipy
+from scipy.stats import kstest, norm, zscore
+import statsmodels.api as sm
+import pylab
 
 # %% Import data
 
@@ -41,10 +44,101 @@ print(df.quantile(0.75)-df.quantile(0.25)) # IQR
 # MEASURES OF RELATION
 print(df.cov()) # cov
 print(df.corr()) # corr
+correlationMatrix = df.corr() 
 
 
 # 'mixed'
 print(df.describe(include='all'))
+
+
+
+
+
+
+### Suggestion: Find a way to find outliers and comment on them
+### Suggestion: Find out if the attributes are normally distributed
+
+
+# %% Data distribution - Visualization
+
+N = df.shape[0]
+M = df.shape[1]
+
+X = df.to_numpy()
+
+attributeNames = list(data.columns)
+
+plt.figure(figsize=(6,4))
+u = np.floor(np.sqrt(M)); v = np.ceil(float(M)/u)
+for i in range(M-1):
+    plt.subplot(u,v,i+1)
+    plt.hist(X[:,i], color=(0.2, 0.8-(i/3)*0.2, 0.4))
+    plt.xlabel(attributeNames[i])
+    plt.ylim(0,N/2)
+    plt.xticks([])
+    plt.yticks([])
+    
+plt.show()
+
+
+# %% Data distribution - Mathematics
+### Source: https://towardsdatascience.com/6-ways-to-test-for-a-normal-distribution-which-one-to-use-9dcf47d8fa93
+
+
+cont_attrs = ["age", "trestbps", "chol", "thalach", "oldpeak"]
+
+for i in range(len(cont_attrs)):
+    my_data = zscore(df[cont_attrs[i]], ddof=1)
+    sm.qqplot(my_data, line='45')
+    ks_statistic, p_value = [round(i, 3) for i in kstest(my_data, 'norm')]
+    print("{} has a k statistic of {} and a p value of {}.".format(cont_attrs[i], ks_statistic, p_value))
+    pylab.show()
+
+
+# %% Box plots for anomaly detection
+
+### Just an overview of all attributes
+### Standardize the continous attributes and remove the nominal ones to get
+### a feasible comparision of alle attributes
+
+plt.boxplot(zscore(X, ddof=1))
+plt.xticks(range(1,14),attributeNames)
+plt.ylabel('')
+plt.title('Heart disease dataset - chaotic boxplot')
+plt.show()
+
+
+### Individual boxplot of the five continous attributes
+### age, trestbps, chol, thalach, oldpeak
+
+X_tilde = np.array([X[:, 0], X[:, 3], X[:, 4], X[:, 7], X[:, 9]])
+attributeNames_tilde = [attributeNames[0], attributeNames[3], attributeNames[4], 
+                        attributeNames[7], attributeNames[9]]
+
+
+
+for i in range(0, X_tilde.shape[0]):
+    plt.boxplot(X_tilde[i].T)
+    plt.xlabel(attributeNames_tilde[i])
+    plt.ylabel('')
+    plt.title('Heart disease dataset - boxplot')
+    plt.show()
+
+
+
+# %% Data matrix
+
+X_standarized = zscore(X, ddof=1)
+
+plt.figure(figsize=(12,6))
+plt.imshow(X_standarized, interpolation='none', aspect=(4./N), cmap=cm.gray);
+plt.xticks(range(13), attributeNames)
+plt.xlabel('Attributes')
+plt.ylabel('Data objects')
+plt.title('Heart disease data matrix')
+plt.colorbar()
+
+plt.show()
 
 
 
