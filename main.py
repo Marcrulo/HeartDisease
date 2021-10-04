@@ -10,6 +10,7 @@ Created on Sun Sep 12 15:49:55 2021
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import scipy
 from scipy.stats import kstest, norm, zscore
@@ -144,7 +145,8 @@ plt.show()
 
 
 # %% PCA
-pca = PCA(n_components=5)
+df = (df-df.mean())/df.std()
+pca = PCA(n_components=3)
 principalComponents = pca.fit_transform(df)
 
 principalDf = pd.DataFrame(data = principalComponents)
@@ -172,7 +174,7 @@ print(pca.components_)
 N,M=df.shape
 V=pca.components_.T
 
-pcs = [0,1,2,4]
+pcs = [0,1]
 legendStrs = ['PC'+str(e+1) for e in pcs]
 bw = .2
 r = np.arange(1,M+1)
@@ -185,23 +187,25 @@ plt.xlabel('Attributes')
 plt.ylabel('Component coefficients')
 plt.legend(legendStrs)
 plt.grid()
-plt.title('NanoNose: PCA Component Coefficients')
+plt.title('PCA Component Coefficients')
 plt.show()
 
 
 
 # %% PLOT 2 FIRST PRINCIPCAL COMPONENTS
+df2 = (df-df.mean())/df.std()
 pca = PCA(n_components=2)
-principalComponents = pca.fit_transform(df)
+principalComponents = pca.fit_transform(df2)
 principalDf = pd.DataFrame(data = principalComponents, columns = ['principal component 1', 'principal component 2'])
 #principalDf = pd.DataFrame(data = principalComponents)
-finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
+finalDf = pd.concat([principalDf, df2[['target']]], axis = 1)
 
 fig = plt.figure(figsize = (8,8))
 ax = fig.add_subplot(1,1,1) 
 ax.set_xlabel('Principal Component 1', fontsize = 15)
 ax.set_ylabel('Principal Component 2', fontsize = 15)
 ax.set_title('2 component PCA', fontsize = 20)
+
 targets = [0,1]
 colors = ['r', 'g', 'b']
 for target, color in zip(targets,colors):
